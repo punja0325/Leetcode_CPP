@@ -46,21 +46,29 @@ class Solution {
 public:
     vector<int> topKFrequent(vector<int>& nums, int k) {
         #ifdef PRIORITY_QUEUE
-        // Create a frequency map
-        unordered_map<int, int> CountMap;
+        // Count the frequency of each element
+        unordered_map<int, int> frequencyMap;
         for (int num : nums) {
-            CountMap[num]++;
+            frequencyMap[num]++;
         }
-        // Create a priority queue
-        priority_queue<pair<int,int>>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
-        for (int i = 0, int j = k; i < CountMap.size(); i++) {
-            pq.push(CountMap[i].second, CountMap[i].first);
 
+        // Use a min-heap to keep track of top k elements
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> minHeap;
+        for (const auto& entry : frequencyMap) {
+            minHeap.push({entry.second, entry.first});
+            if (minHeap.size() > k) {
+                minHeap.pop();
+            }
         }
-        return {}
 
+        // Extract the top k frequent elements
+        vector<int> result;
+        while (!minHeap.empty()) {
+            result.push_back(minHeap.top().second);
+            minHeap.pop();
+        }
+        return result;
         #endif
-        
     }
 };
 // @lc code=end
