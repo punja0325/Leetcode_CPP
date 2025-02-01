@@ -51,23 +51,21 @@ public:
         for (int num : nums) {
             frequencyMap[num]++;
         }
-
-        // Use a min-heap to keep track of top k elements
-        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> minHeap;
-        for (const auto& entry : frequencyMap) {
-            minHeap.push({entry.second, entry.first});
-            if (minHeap.size() > k) {
-                minHeap.pop();
+        // Create a priority queue
+        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+        for (auto pair : CountMap) {
+            pq.push({pair.second, pair.first});
+            if (pq.size() > k) {
+                pq.pop(); // pop the smallest element
             }
         }
-
-        // Extract the top k frequent elements
-        vector<int> result;
-        while (!minHeap.empty()) {
-            result.push_back(minHeap.top().second);
-            minHeap.pop();
+        // Get the top k elements
+        vector<int> topK;
+        while (!pq.empty()) {
+            topK.push_back(pq.top().second);
+            pq.pop();
         }
-        return result;
+        return topK;
         #endif
     }
 };
