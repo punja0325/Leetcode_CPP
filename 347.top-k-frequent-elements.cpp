@@ -52,13 +52,20 @@ public:
             CountMap[num]++;
         }
         // Create a priority queue
-        priority_queue<pair<int,int>>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
-        for (int i = 0, int j = k; i < CountMap.size(); i++) {
-            pq.push(CountMap[i].second, CountMap[i].first);
-
+        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+        for (auto pair : CountMap) {
+            pq.push({pair.second, pair.first});
+            if (pq.size() > k) {
+                pq.pop(); // pop the smallest element
+            }
         }
-        return {}
-
+        // Get the top k elements
+        vector<int> topK;
+        while (!pq.empty()) {
+            topK.push_back(pq.top().second);
+            pq.pop();
+        }
+        return topK;
         #endif
         
     }
