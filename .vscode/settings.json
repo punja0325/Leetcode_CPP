@@ -1,0 +1,25 @@
+{
+    "files.associations": {
+        "queue": "cpp",
+        "stack": "cpp",
+        "__split_buffer": "cpp",
+        "deque": "cpp",
+        "string": "cpp",
+        "vector": "cpp",
+        "iosfwd": "cpp",
+        "ios": "cpp",
+        "array": "cpp",
+        "string_view": "cpp",
+        "__node_handle": "cpp",
+        "unordered_map": "cpp",
+        "__locale": "cpp",
+        "variant": "cpp",
+        "limits": "cpp",
+        "algorithm": "cpp",
+        "__hash_table": "cpp",
+        "bitset": "cpp",
+        "initializer_list": "cpp",
+        "ratio": "cpp",
+        "__bit_reference": "cpp"
+    }
+}
