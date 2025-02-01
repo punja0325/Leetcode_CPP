@@ -51,9 +51,10 @@ public:
         for (int num : nums) {
             frequencyMap[num]++;
         }
+
         // Create a priority queue
         priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
-        for (auto pair : CountMap) {
+        for (auto pair : frequencyMap) {
             pq.push({pair.second, pair.first});
             if (pq.size() > k) {
                 pq.pop(); // pop the smallest element
