@@ -17,7 +17,7 @@ public:
             l++;
             r--;
         }
-        
+
     }
 };
 // @lc code=end

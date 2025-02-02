@@ -51,7 +51,7 @@ public:
             s.pop();
         }
         cur->next = NULL;
-        #endif  
+        #endif
         return head;
     }
 };

@@ -7,7 +7,7 @@
 // @lc code=start
 class Solution {
 public:
-    int majorityElement(vector<int>& nums) 
+    int majorityElement(vector<int>& nums)
     {
         unordered_map<int, int> counts;
         for (auto num : nums) {

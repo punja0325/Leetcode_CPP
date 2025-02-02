@@ -42,7 +42,7 @@ private:
             res.push_back(nums);
             return;
         }
-        
+
         // Explore all possible permutations by swapping elements
         for(int i = start; i < nums.size(); i++) {
             swap(nums[start], nums[i]);
@@ -50,7 +50,7 @@ private:
             swap(nums[start], nums[i]); // Backtrack: undo the swap
         }
     }
-        
+
 };
 // Leetcode 77:
 class Solution {
@@ -69,7 +69,7 @@ private:
             res.push_back(temp);
             return;
         }
-        
+
         // 從start+1開始選擇下一個元素，避免重復
         for (int i = start + 1; i <= n; ++i) {
             temp.push_back(i); // 選擇i
