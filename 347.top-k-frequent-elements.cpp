@@ -46,11 +46,38 @@ class Solution {
 public:
     vector<int> topKFrequent(vector<int>& nums, int k) {
         #ifdef PRIORITY_QUEUE
+        if (k <= 0 || nums.empty()) {
+            return {};
+        }
+
+        // Create a frequency map
+        unordered_map<int, int> CountMap;
         // Count the frequency of each element
         unordered_map<int, int> frequencyMap;
         for (int num : nums) {
             frequencyMap[num]++;
         }
+
+        // Create a priority queue to store (frequency, element)
+        priority_queue<pair<int, int>, vector<pair<int, int>>> pq; //frequency, element
+
+        // Populate the priority queue
+        for (auto& entry : CountMap) {
+            int frequency = entry.second;
+            int element = entry.first;
+            pq.push(make_pair(frequency, element));
+        }
+
+        // Extract top k elements
+        vector<int> result;
+        int count = 0;
+        while (!pq.empty() && count < k) {
+            result.push_back(pq.top().second);
+            pq.pop();
+            count++;
+        }
+
+        return result;
 
         // Create a priority queue
         priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
