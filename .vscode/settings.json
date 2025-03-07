@@ -20,6 +20,8 @@
         "bitset": "cpp",
         "initializer_list": "cpp",
         "ratio": "cpp",
-        "__bit_reference": "cpp"
+        "__bit_reference": "cpp",
+        "tuple": "cpp",
+        "unordered_set": "cpp"
     }
 }
