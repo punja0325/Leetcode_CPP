@@ -62,7 +62,8 @@ public:
         while(l < r) {
             int x = r - l;
             int y = min(height[l], height[r]);
-            maxArea = max(maxArea, x * y);
+            int Area = x * y;
+            maxArea = max(Area, maxArea);
             if (height[l] < height[r]) {
                 l++;
             } else {
