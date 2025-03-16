@@ -63,13 +63,14 @@ public:
         for(int right = 0; right < s.length(); right++) {
             windowFreq[s[right]]++;
             if (right - left + 1 == 3) {
-                if (windowFreq[s[right]] == && windowFreq[s[left]] == 1 && windowFreq[left + 1] == 1) {
+                if (windowFreq[s[right]] == 1 && windowFreq[s[left]] == 1 && windowFreq[s[left + 1]] == 1) {
                     ans++;
                 }
                 windowFreq[s[left]]--;
                 left++;
             }
         }
+        return ans;
     }
 };
 // @lc code=end
