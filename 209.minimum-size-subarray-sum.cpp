@@ -58,25 +58,19 @@
 // @lc code=start
 class Solution {
 public:
-    int minSubArrayLen(int target, std::vector<int>& nums) {
-        int min_length = INT_MAX;
-        int current_sum = 0;
+    int minSubArrayLen(int target, vector<int>& nums) {
+        int minLength = INT_MAX;
         int left = 0;
-
-        for (int right = 0; right < nums.size(); ++right) {
-            current_sum += nums[right];
-
-            // 缩小窗口，直到current_sum < target，或者left不能再右移
-            while (current_sum >= target) {
-                // 更新最小长度
-                min_length = std::min(min_length, right - left + 1);
-                // 移动左指针，尝试找到更小的窗口
-                current_sum -= nums[left];
-                left++;
+        int sum = 0;
+        for(int right = 0; right < nums.size(); right++) {
+            sum += nums[right];
+            while(sum >= target && left <= right) {
+                int Length = right - left + 1;
+                minLength = min(minLength, Length);
+                sum -= nums[left++];
             }
         }
-
-        return min_length != INT_MAX ? min_length : 0;
+        return minLength == INT_MAX ? 0 : minLength;
     }
 };
 // @lc code=end
