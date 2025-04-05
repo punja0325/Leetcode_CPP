@@ -59,7 +59,7 @@ class Solution {
 public:
 
     int maxDepth(TreeNode* root) {
-        #if 1
+        #if 0
         //Interative (BFS(Breadth-First Search) + Queue)
         if (!root) return 0;//Base case: empty tree has depth 0
         queue<TreeNode*> q;
@@ -79,9 +79,12 @@ public:
         }
         return depth;
         #else
-        if (!root) return 0;
-        // non recursive
-        return 1 + max(maxDepth(root->left), maxDepth(root->right));
+        if (root == 0) {
+            return 0;
+        }
+        int max_left_depth = 1 + maxDepth(root->left);
+        int max_right_depth = 1 + maxDepth(root->right);
+        return max(max_left_depth, max_right_depth);
         #endif
     }
 };
