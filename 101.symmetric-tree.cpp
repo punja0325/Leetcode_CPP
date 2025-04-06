@@ -69,26 +69,19 @@ class Solution {
 public:
     bool isSymmetric(TreeNode* root) {
         #ifdef INTERATIVE_SOLUTION
-        if (!root) return true; //If the tree is empty, it is symmetric
-
-        queue<TreeNode*> q;
-        q.push(root->left); // Push left child
-        q.push(root->right);// Push right child
+        if (!root) return true;
+        queue<pair<TreeNode*, TreeNode*>> q;
+        q.push({root, root});
         while(!q.empty()) {
-            TreeNode* left = q.front(); q.pop();
-            TreeNode* right = q.front(); q.pop();
-            // If both nodes are null, continue
-            if (!left && !right) continue;
-            // If one is null and the other is not, return false
-            if (!left || !right) return false;
-            // If values are not equal, return false
-            if (left->val != right->val) return false;
-
-            // Push children in mirror order
-            q.push(left->left);
-            q.push(right->right);
-            q.push(left->right);
-            q.push(right->left);
+            int levelSize = q.size();
+            for(int i = 0; i < levelSize; i++) {
+                auto [node1, node2] = q.front(); q.pop();
+                if (!node1 && !node2) continue;
+                if (!node1 || !node2) return false;
+                if(node1->val != node2->val) return false;
+                q.push({node1->left, node2->right});
+                q.push({node1->right, node2->left});
+            }
         }
         return true;
 
