@@ -68,13 +68,26 @@
 class Solution {
 public:
     bool isSymmetric(TreeNode* root) {
-        #ifdef INTERATIVE_SOLUTION
+        #if 1
+        if (!root) return true;
+        stack<pair<TreeNode*, TreeNode*>> st;
+        st.push({root, root});
+        while(!st.empty()) {
+            auto [node1, node2] = st.top(); st.pop();
+            if (!node1 && !node2) continue;
+            if (!node1 || !node2) return false;
+            if(node1->val != node2->val) return false;
+            st.push({node1->left, node2->right});
+            st.push({node1->right, node2->left});
+        }
+        return true;
+        #elif 1
         if (!root) return true;
         queue<pair<TreeNode*, TreeNode*>> q;
         q.push({root, root});
         while(!q.empty()) {
-            int levelSize = q.size();
-            for(int i = 0; i < levelSize; i++) {
+            int levelSize = q.size();fda
+           for(int i = 0; i < levelSize; i++) {
                 auto [node1, node2] = q.front(); q.pop();
                 if (!node1 && !node2) continue;
                 if (!node1 || !node2) return false;
@@ -84,8 +97,8 @@ public:
             }
         }
         return true;
-
         #endif
+
         #ifdef RECURSIVE_SOLUTION
         if (!root) return true; /// If the tree is empty, it is symmetric
         return isMirror(root->left, root->right); // Check if left and right subtrees are mirrors
