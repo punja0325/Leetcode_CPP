@@ -56,37 +56,52 @@
  * };
  */
 class Solution {
-public:
-
-    int maxDepth(TreeNode* root) {
-        #if 0
-        //Interative (BFS(Breadth-First Search) + Queue)
-        if (!root) return 0;//Base case: empty tree has depth 0
-        queue<TreeNode*> q;
-        q.push(root);
-        int depth = 0;
-        while (!q.empty()) {
-            int levelSize = q.size();//Number of the nodes at the current level
-            depth++;
-
-            //Process all nodes at the current queue
-            for (int i = 0; i < levelSize; i++) {
-                TreeNode* node = q.front();
-                if (node->left) q.push(node->left);
-                if (node->right) q.push(node->right);
-                q.pop();
+    #if 1
+    public:
+        int maxDepth(TreeNode* root) {
+            //DFS
+            if (!root) return 0;
+            stack<pair<TreeNode*, int>> st;
+            st.push({root, 1});
+            int maxDepth = 0;
+            while(!st.empty()) {
+                auto [node, depth] = st.top(); st.pop();
+                if (node) {
+                    maxDepth = max(depth, maxDepth);
+                    if (node->left) st.push({node->left, depth+1});
+                    if (node->right) st.push({node->right, depth+1});
+                }
             }
+            return maxDepth;
         }
-        return depth;
-        #else
-        if (root == 0) {
-            return 0;
+    #elif 1
+    public:
+        int maxDepth(TreeNode* root) {
+            //BFS
+            if (!root) return 0;
+            queue<TreeNode*> q;
+            q.push(root);
+            int depth = 0;
+            while(!q.empty()) {
+                int levelSize = q.size(); // Number of the nodes in the current level
+                depth++;
+                for(int i = 0; i < levelSize; i++) {
+                    TreeNode* node = q.front(); q.pop();
+                    if (node->left) q.push(node->left);
+                    if (node->right) q.push(node->right);
+                }
+            }
+            return depth;
         }
-        int max_left_depth = 1 + maxDepth(root->left);
-        int max_right_depth = 1 + maxDepth(root->right);
-        return max(max_left_depth, max_right_depth);
-        #endif
-    }
-};
+    #else
+    public:
+        int maxDepth(TreeNode* root) {
+            if (root == NULL) return 0;
+            int leftDepth = maxDepth(root->left);
+            int rightDepth = maxDepth(root->right);
+            return max(leftDepth, rightDepth) + 1;
+        }
+    #endif
+    };
 // @lc code=end
 
