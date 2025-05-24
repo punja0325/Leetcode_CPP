@@ -41,17 +41,13 @@
  */
 
 // @lc code=start
-#define PRIORITY_QUEUE
 class Solution {
 public:
     vector<int> topKFrequent(vector<int>& nums, int k) {
-        #ifdef PRIORITY_QUEUE
         if (k <= 0 || nums.empty()) {
             return {};
         }
 
-        // Create a frequency map
-        unordered_map<int, int> CountMap;
         // Count the frequency of each element
         unordered_map<int, int> frequencyMap;
         for (int num : nums) {
@@ -59,13 +55,13 @@ public:
         }
 
         // Create a priority queue to store (frequency, element)
-        priority_queue<pair<int, int>, vector<pair<int, int>>> pq; //frequency, element
+        priority_queue<pair<int, int>> pq; //frequency, element
 
         // Populate the priority queue
-        for (auto& entry : CountMap) {
-            int frequency = entry.second;
+        for (auto& entry : frequencyMap) {
             int element = entry.first;
-            pq.push(make_pair(frequency, element));
+            int frequency = entry.second;
+            pq.push({frequency, element});
         }
 
         // Extract top k elements
@@ -78,23 +74,6 @@ public:
         }
 
         return result;
-
-        // Create a priority queue
-        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
-        for (auto pair : frequencyMap) {
-            pq.push({pair.second, pair.first});
-            if (pq.size() > k) {
-                pq.pop(); // pop the smallest element
-            }
-        }
-        // Get the top k elements
-        vector<int> topK;
-        while (!pq.empty()) {
-            topK.push_back(pq.top().second);
-            pq.pop();
-        }
-        return topK;
-        #endif
     }
 };
 // @lc code=end
